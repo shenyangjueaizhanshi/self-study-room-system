@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration debug="false">
     <!--定义日志文件的存储地址-->
-    <property name="LOG_HOME" value="/opt/logs/fund-business"/>
+    <property name="LOG_HOME" value="/opt/logs"/>
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="lsjColor" converterClass="com.example.selfstudyroomsystem.logback.LogbackColor" />
     <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
