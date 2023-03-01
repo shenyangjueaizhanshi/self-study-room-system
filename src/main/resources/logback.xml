@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="false">
+    <!--定义日志文件的存储地址-->
+    <property name="LOG_HOME" value="/opt/logs/fund-business"/>
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="lsjColor" converterClass="com.example.selfstudyroomsystem.logback.LogbackColor" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%lsjColor(%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]){faint} ${LOG_LEVEL_PATTERN:-%5p} %lsjColor(-){faint} %-20.40logger{39} %lsjColor(:){faint} %lsjColor(%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}})" />
+    <!-- 控制台输出 -->
+
+    <!-- Console 输出设置 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/out.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <FileNamePattern>${LOG_HOME}/out-%d{yyyy-MM-dd-HH}-%i.log.zip
+            </FileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+            <!-- or whenever the file size reaches 100MB -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} %L - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成ERROR日志文件 -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/error.log</File>
+        <!-- 过滤日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <FileNamePattern>${LOG_HOME}/error-%d{yyyy-MM-dd-HH}-%i.log.zip
+            </FileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+            <!-- or whenever the file size reaches 100MB -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} %L - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--异步日志-->
+    <appender name="ASYNC_FILEINFO" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 设置为不丢失日志,默认如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,默认值为256 -->
+        <queueSize>1000</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+    <!--异步日志-->
+    <appender name="ASYNC_ERROR_FILEINFO" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 设置为不丢失日志,默认如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,默认值为256 -->
+        <queueSize>1000</queueSize>
+        <appender-ref ref="ERROR_FILE"/>
+    </appender>
+    <!-- 日志输出级别 -->
+    <logger name="com.sun" level="ERROR"/>
+    <logger name="org" level="ERROR"/>
+
+    <!-- project default level -->
+    <logger name="com.linlong.fund" level="DEBUG"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="com.linlong.fund.service.adapter.ApiRequestMappingHandlerMapping" level="ERROR"/>
+    <logger name="org.apache.ibatis.io" level="INFO"/>
+    <logger name="org.apache.http" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <!--log4jdbc -->
+    <logger name="jdbc.connection" level="DEBUG"/>
+    <logger name="jdbc.audit" level="DEBUG"/>
+    <logger name="jdbc.resultset" level="DEBUG"/>
+    <logger name="jdbc.sqlonly" level="DEBUG"/>
+    <logger name="jdbc.sqltiming" level="DEBUG"/>
+<!--    <logger name="com.linlong.fund.service.aspect.RedisAspect" level="DEBUG"/>-->
+
+    <!--业务-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC_FILEINFO"/>
+        <appender-ref ref="ASYNC_ERROR_FILEINFO"/>
+    </root>
+</configuration>
