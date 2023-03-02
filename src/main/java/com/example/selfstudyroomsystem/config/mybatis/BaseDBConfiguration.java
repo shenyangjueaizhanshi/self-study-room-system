@@ -71,7 +71,12 @@ public class BaseDBConfiguration {
         try {
             datasource.setFilters(dbProperties.getFilters());
         } catch (SQLException e) {
-            log.error("druid configuration initialization filter", e);
+            log.error("druid configuration initialization filter->{}", e.getMessage());
+        }
+        try {
+            datasource.init();
+        } catch (SQLException e) {
+            log.error("druid init fail->{}", e.getMessage());
         }
         return datasource;
     }
