@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: uat
+  application:
+    name: self-study-room-system
+  cloud:
+    nacos:
+      config:
+        server-addr: 47.115.201.56:8848
+        namespace: uat
+        max-retry: 3000
+        shared-configs:
+        extension-configs:
+          - group: self-study-room-system
+            data-id: self-study-room-system.yml
+            refresh: true
+          - group: DEFAULT_GROUP
+            data-id: spring-mysql.yml
+            refresh: true
