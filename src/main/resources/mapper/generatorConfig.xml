@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--数据库驱动-->
+    <!--<classPathEntry location="driver/mysql-connector-java-5.1.36.jar"/>-->
+    <context id="Mysql" targetRuntime="MyBatis3Simple">
+        <!--Mapper-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--生成的pojo，将implements Serializable-->
+        <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>-->
+        <!--配置mapper继承接口-->
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!--是否自动生成的注释 true：是 false：否-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库链接URL、账号、密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.115.201.56:3306/study?useUnicode=true&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;rewriteBatchedStatements=true"
+                        userId="root" password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!--默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+                   true，把JDBC DECIMAL 和 NUMERIC 类型解析为 java.math.BigDecimal-->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="${targetEntityPackage}" targetProject="${targetJavaProject}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="${targetResourcesProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成Mapper类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${targetMapperPackage}"
+                             targetProject="${targetJavaProject}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="auth_member" domainObjectName="AuthMember"
+               enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

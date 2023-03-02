@@ -82,9 +82,9 @@
     <logger name="org" level="ERROR"/>
 
     <!-- project default level -->
-    <logger name="com.linlong.fund" level="DEBUG"/>
+    <logger name="com.example.selfstudyroomsystem" level="DEBUG"/>
     <logger name="org.springframework" level="ERROR"/>
-    <logger name="com.linlong.fund.service.adapter.ApiRequestMappingHandlerMapping" level="ERROR"/>
+    <logger name="com.example.selfstudyroomsystem.config" level="DEBUG"/>
     <logger name="org.apache.ibatis.io" level="INFO"/>
     <logger name="org.apache.http" level="ERROR"/>
     <logger name="org.hibernate" level="ERROR"/>

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import tk.mybatis.spring.annotation.MapperScan;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -17,8 +18,10 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @ComponentScans(value = {
         @ComponentScan(value = "com.example.selfstudyroomsystem.controller"),
-        @ComponentScan(value = "com.example.selfstudyroomsystem.config")
+        @ComponentScan(value = "com.example.selfstudyroomsystem.config"),
+        @ComponentScan(value = "com.example.selfstudyroomsystem.dao")
 })
+@MapperScan(value = "com.example.selfstudyroomsystem.dao")
 public class SelfStudyRoomSystemApplication {
 
     public static void main(String[] args) {
