@@ -1,15 +1,13 @@
 spring:
   profiles:
-    active: uat
   application:
     name: self-study-room-system
   cloud:
     nacos:
       config:
         server-addr: 47.115.201.56:8848
-        namespace: uat
+        namespace: 957f2633-b344-44ec-8eb1-c48cdcb7603a
         max-retry: 3000
-        shared-configs:
         extension-configs:
           - group: self-study-room-system
             data-id: self-study-room-system.yml
@@ -17,3 +15,4 @@ spring:
           - group: DEFAULT_GROUP
             data-id: spring-mysql.yml
             refresh: true
+        file-extension: yml

@@ -1,41 +1,41 @@
-logging:
-  level:
-    root: info
-server:
-  port: 8091
-spring:
-  mvc:
-    static-path-pattern: /**
-  datasource:
-    initialSize : 5
-    minIdle : 10
-    maxActive: 300
-    maxWait: 30000
-    minEvictableIdleTimeMillis: 300000
-    timeBetweenEvictionRunsMillis: 60000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: true
-    exceptionSorter: true
-    testOnReturn: false
-    poolPreparedStatements: true
-    filters: stat,slf4j
-    maxPoolPreparedStatementPerConnectionSize: 20
-    useGlobalDataSourceStat: true
-  datasourceectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-
-  servlet:
-    multipart:
-      max-file-size: 5
-      max-request-size: 10
-
-local:
-  driverClass: com.mysql.jdbc.Driver
-  jdbcUrl: jdbc:mysql://47.115.201.56:3306/study?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true&allowMultiQueries=true
-  username: root
-  password: 123456
-  minEvictableIdleTimeMillis: 60000
-  maxActive: 90
+#logging:
+#  level:
+#    root: info
+#server:
+#  port: 8091
+#spring:
+#  mvc:
+#    static-path-pattern: /**
+#  datasource:
+#    initialSize : 5
+#    minIdle : 10
+#    maxActive: 300
+#    maxWait: 30000
+#    minEvictableIdleTimeMillis: 300000
+#    timeBetweenEvictionRunsMillis: 60000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: true
+#    exceptionSorter: true
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    filters: stat,slf4j
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    useGlobalDataSourceStat: true
+#  datasourceectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+#
+#  servlet:
+#    multipart:
+#      max-file-size: 5
+#      max-request-size: 10
+#
+#local:
+#  driverClass: com.mysql.jdbc.Driver
+#  jdbcUrl: jdbc:mysql://47.115.201.56:3306/study?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true&allowMultiQueries=true
+#  username: root
+#  password: 123456
+#  minEvictableIdleTimeMillis: 60000
+#  maxActive: 90
 
 
 

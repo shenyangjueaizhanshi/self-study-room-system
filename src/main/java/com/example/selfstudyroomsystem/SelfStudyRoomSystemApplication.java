@@ -2,7 +2,9 @@ package com.example.selfstudyroomsystem;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -15,7 +17,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 @ComponentScans(value = {
         @ComponentScan(value = "com.example.selfstudyroomsystem.controller"),
         @ComponentScan(value = "com.example.selfstudyroomsystem.config"),
