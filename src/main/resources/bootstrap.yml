@@ -1,5 +1,4 @@
 spring:
-  profiles:
   application:
     name: self-study-room-system
   cloud:
@@ -16,3 +15,6 @@ spring:
             data-id: spring-mysql.yml
             refresh: true
         file-extension: yml
+      discovery:
+        server-addr: 47.115.201.56:8848
+        register-enabled: true
